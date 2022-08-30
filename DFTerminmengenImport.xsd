@@ -1,0 +1,73 @@
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:vc="http://www.w3.org/2007/XMLSchema-versioning" elementFormDefault="qualified" attributeFormDefault="unqualified" vc:minVersion="1.1">
+	<xs:element name="DFTerminmengenImport" type="DFTerminmengenImportType"/>
+	<xs:complexType name="TerminmengeType">
+		<xs:sequence maxOccurs="unbounded">
+			<xs:element name="Kennung" type="xs:string" minOccurs="0">
+				<xs:annotation>
+					<xs:documentation>Kennung der ausgebenden Software. Wird von DATAflor BUSINESS nicht verwendet, wird nur in den Fehlermeldungen mit ausgegeben.</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:choice>
+				<xs:annotation>
+					<xs:documentation>Entweder IdPosition angeben oder PosNr und LvNr. Ist IdPosition gesetzt, werden PosNr und LvNr ignoriert .</xs:documentation>
+				</xs:annotation>
+				<xs:sequence>
+					<xs:element name="IdPosition" type="string15Type"/>
+					<xs:element name="PosNr" type="positionNummerType" minOccurs="0"/>
+					<xs:element name="LvNr" type="lvNummerType" minOccurs="0"/>
+				</xs:sequence>
+				<xs:sequence>
+					<xs:element name="PosNr" type="positionNummerType"/>
+					<xs:element name="LvNr" type="lvNummerType"/>
+				</xs:sequence>
+			</xs:choice>
+			<xs:element name="Datum" type="xs:date">
+				<xs:annotation>
+					<xs:documentation>Datum im Format dd.MM.jjjj oder yyyy-MM-dd</xs:documentation>
+				</xs:annotation>
+			</xs:element>
+			<xs:element name="Menge" type="xs:float" minOccurs="0"/>
+			<xs:element name="Kommentar" type="string80Type" minOccurs="0"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="DFTerminmengenImportType">
+		<xs:sequence maxOccurs="unbounded">
+			<xs:annotation>
+				<xs:documentation>Wurzeleintrag der Terminmenge-XML-Datei</xs:documentation>
+			</xs:annotation>
+			<xs:element name="Terminmenge" type="TerminmengeType"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:simpleType name="string15Type">
+		<xs:annotation>
+			<xs:documentation>ID-Feld mit max. 15 Zeichen</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:maxLength value="15"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="string80Type">
+		<xs:annotation>
+			<xs:documentation>String-Feld mit max. 80 Zeichen</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:maxLength value="80"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="lvNummerType">
+		<xs:annotation>
+			<xs:documentation>Nummer des Leistungsverzeichnis</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:maxLength value="16"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="positionNummerType">
+		<xs:annotation>
+			<xs:documentation>Nummer der Position</xs:documentation>
+		</xs:annotation>
+		<xs:restriction base="xs:string">
+			<xs:maxLength value="16"/>
+		</xs:restriction>
+	</xs:simpleType>
+</xs:schema>
