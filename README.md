@@ -33,4 +33,4 @@ Positionen hier:
            
 Tabelle POSITIONEN_DATA  Feld  IS_TERMIN_ABRECHNUNG=1 und Feld ABRECHNUNGSART_PFLEGE = 1 oder 2
 
-Ergänzung: Die übergebene Terminmenge muss im nummerischen Format mit einem Punkt als Dezimaltrennzeichen übergeben werden.
+Ergänzung: Die übergebene Terminmenge im nummerischen Format kann mit einem Punkt oder Komma als Dezimaltrennzeichen übergeben werden.
